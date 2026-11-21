@@ -56,18 +56,20 @@ ol { margin: 6px 0 0; padding-left: 22px; } li { margin: 6px 0; }
     if (!urg && /^\d{4}-\d{2}-\d{2}$/.test(t.deadline || '')) { var p = t.deadline.split('-'); var d = new Date(+p[0], +p[1] - 1, +p[2]); var hoje = new Date(); hoje.setHours(0, 0, 0, 0); urg = (d - hoje) / 864e5 <= 1; }
     return t.imp && urg ? 'q1' : t.imp ? 'q2' : urg ? 'q3' : 'q4';
   }
-  function prazo(t) { if (!/^\d{4}-\d{2}-\d{2}$/.test(t.deadline || '')) return ''; var p = t.deadline.split('-'); return 'prazo ' + p[2] + '/' + p[1]; }
+  function prazo(t) { if (!/^\d{4}-\d{2}-\d{2}$/.test(t.deadline || '')) return ''; var p = t.deadline.split('-'); return (t.time ? '' : 'prazo ') + p[2] + '/' + p[1] + (t.time ? ' · ' + t.time : ''); }
+  var DS = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'];
+  function repete(r) { if (!r || !r.kind) return ''; if (r.kind === 'dia') return 'todo dia'; if (r.kind === 'mes') return 'todo dia ' + r.dom; var d = (r.days || []).slice().sort(); return d.join() === '1,2,3,4,5' ? 'dias úteis' : 'toda ' + d.map(function (x) { return DS[x]; }).join(', '); }
   var code = codeFromUrl();
   if (!code) { el.innerHTML = '<h1>Link incompleto</h1><p class="muted">Peça para mandarem a tarefa de novo.</p>'; return; }
   decode(code).then(function (txt) {
     var data = JSON.parse(txt), t = data.tarefa || {};
     var q = quad(t), passos = (t.steps || []).filter(function (s) { return s && s.t; });
     var intent = 'intent://cidedson.github.io/t/?d=' + encodeURIComponent(code) + '#Intent;scheme=https;package=' + PKG + ';end';
-    var texto = [t.title, t.what ? 'Pronto quando: ' + t.what : '', prazo(t)].concat(passos.map(function (s, i) { return (i + 1) + '. ' + s.t + (s.est ? ' (' + s.est + ' min)' : ''); })).filter(Boolean).join('\n');
+    var texto = [t.title, t.what ? 'Pronto quando: ' + t.what : '', prazo(t), t.place ? 'Local: ' + t.place : '', repete(t.rep) ? 'Repete: ' + repete(t.rep) : ''].concat(passos.map(function (s, i) { return (i + 1) + '. ' + s.t + (s.est ? ' (' + s.est + ' min)' : ''); })).filter(Boolean).join('\n');
     el.innerHTML =
       '<h1>' + esc(t.title) + '</h1>' +
       '<p class="muted">' + (data.de ? esc(data.de) + ' te mandou esta tarefa.' : 'Alguém te mandou esta tarefa.') + '</p>' +
-      '<div>' + (q ? '<span class="chip' + (q === 'q1' ? ' warn' : '') + '">' + QUADS[q] + '</span>' : '') + (prazo(t) ? '<span class="chip">' + prazo(t) + '</span>' : '') + '</div>' +
+      '<div>' + (q ? '<span class="chip' + (q === 'q1' ? ' warn' : '') + '">' + QUADS[q] + '</span>' : '') + (prazo(t) ? '<span class="chip">' + prazo(t) + '</span>' : '') + (t.place ? '<span class="chip">' + esc(t.place) + '</span>' : '') + (repete(t.rep) ? '<span class="chip">↻ ' + repete(t.rep) + '</span>' : '') + '</div>' +
       (t.what ? '<div class="card"><p class="eyebrow">Pronto quando</p><p style="margin:4px 0 0">' + esc(t.what) + '</p></div>' : '') +
       (passos.length ? '<div class="card"><p class="eyebrow">Passos</p><ol>' + passos.map(function (s) { return '<li>' + esc(s.t) + (s.est ? ' <span class="muted">(' + esc(s.est) + ' min)</span>' : '') + '</li>'; }).join('') + '</ol></div>' : '') +
       '<a class="btn" href="' + intent + '">Abrir no app TDAH na Vida Real</a>' +
