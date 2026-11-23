@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Como usar o TDAH na Vida Real · tutorial guiado</title>
+<meta name="description" content="Tutorial guiado do app TDAH na Vida Real: 23 lições curtas, com a tela e o passo a passo de cada função.">
+<meta property="og:title" content="Como usar o TDAH na Vida Real">
+<meta property="og:description" content="Tutorial guiado: 23 lições curtas, com a tela e o passo a passo de cada função do app.">
+<meta property="og:image" content="https://cidedson.github.io/como-usar/img/capa.png">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#1f5f5b">
+<style>
+:root { --bg: #f4f3ef; --card: #fdfcf9; --ink: #17201e; --muted: #5d6b68; --accent: #1f5f5b; --accent-soft: #dcebe8; --line: #e3e1da; --warm: #fbe9dc; --warm-ink: #8a4a24; }
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { font: 17px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); -webkit-tap-highlight-color: transparent; }
+a { color: var(--accent); font-weight: 700; }
+button { font: inherit; cursor: pointer; border: 0; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 18px; }
+/* Sumário */
+.hero { background: var(--accent); color: #fff; padding: 34px 0 30px; }
+.hero h1 { font-size: 30px; line-height: 1.15; margin: 6px 0 10px; letter-spacing: -0.01em; }
+.hero p { margin: 0; opacity: .92; max-width: 560px; }
+.eyebrow { text-transform: uppercase; letter-spacing: .08em; font-size: 12px; font-weight: 800; opacity: .85; margin: 0; }
+.hero .go { margin-top: 20px; display: inline-flex; gap: 10px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 20px; border-radius: 14px; font-weight: 800; text-decoration: none; font-size: 16px; }
+.btn.light { background: #fff; color: var(--accent); }
+.btn.ghost { background: rgba(255,255,255,.14); color: #fff; }
+.btn.main { background: var(--accent); color: #fff; }
+.btn.out { background: transparent; color: var(--accent); box-shadow: inset 0 0 0 2px var(--line); }
+.chap { margin: 26px 0 0; }
+.chap h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 4px 8px; }
+.list { background: var(--card); border-radius: 18px; box-shadow: 0 1px 2px rgba(0,0,0,.05); overflow: hidden; }
+.list a { display: flex; align-items: center; gap: 12px; padding: 13px 16px; text-decoration: none; color: var(--ink); font-weight: 600; border-bottom: 1px solid var(--line); }
+.list a:last-child { border-bottom: 0; }
+.list .n { width: 30px; height: 30px; border-radius: 15px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; font-size: 13px; font-weight: 800; flex: none; }
+.list a.seen .n { background: var(--accent); color: #fff; }
+.list .t { flex: 1; }
+.list .arr { color: var(--muted); }
+.foot { color: var(--muted); font-size: 14px; padding: 28px 4px 40px; }
+/* Lição */
+.bar { position: sticky; top: 0; z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); }
+.bar .in { display: flex; align-items: center; gap: 10px; height: 56px; }
+.bar .home { width: 44px; height: 44px; border-radius: 12px; background: var(--card); display: grid; place-items: center; color: var(--ink); text-decoration: none; flex: none; }
+.bar .meta { flex: 1; min-width: 0; font-size: 14px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar .meta b { color: var(--ink); }
+.prog { height: 4px; background: var(--line); }
+.prog i { display: block; height: 100%; background: var(--accent); transition: width .25s; }
+.lesson { display: grid; grid-template-columns: 1fr; gap: 18px; padding: 18px 18px 110px; }
+.lesson h1 { font-size: 26px; line-height: 1.2; margin: 2px 0 6px; letter-spacing: -0.01em; }
+.lesson .intro { color: var(--muted); margin: 0; }
+.shot { justify-self: center; width: min(270px, 72vw); margin-top: 6px; border-radius: 26px; background: #0f1716; padding: 8px; box-shadow: 0 10px 30px rgba(0,0,0,.18); }
+.shot img { display: block; width: 100%; height: auto; border-radius: 19px; aspect-ratio: 540 / 1168; background: #22302d; }
+.steps { list-style: none; margin: 4px 0 0; padding: 0; counter-reset: s; }
+.steps li { position: relative; padding: 10px 0 10px 44px; border-bottom: 1px solid var(--line); counter-increment: s; }
+.steps li:last-child { border-bottom: 0; }
+.steps li::before { content: counter(s); position: absolute; left: 0; top: 9px; width: 30px; height: 30px; border-radius: 15px; background: var(--accent); color: #fff; font-weight: 800; font-size: 14px; display: grid; place-items: center; }
+.tip { background: var(--warm); color: var(--warm-ink); border-radius: 14px; padding: 12px 14px; margin-top: 14px; font-size: 15px; }
+.tip b { color: var(--warm-ink); }
+.nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 6; background: rgba(244,243,239,.96); border-top: 1px solid var(--line); padding: 10px 0 calc(10px + env(safe-area-inset-bottom)); backdrop-filter: blur(6px); }
+.nav .in { display: flex; gap: 10px; }
+.nav .btn { flex: 1; }
+.nav .btn[disabled] { opacity: .35; pointer-events: none; }
+.done { text-align: center; padding: 40px 18px 120px; }
+.done .big { font-size: 64px; line-height: 1; margin: 0 0 10px; }
+.done h1 { font-size: 28px; margin: 0 0 8px; }
+.done .row { display: flex; flex-direction: column; gap: 10px; max-width: 360px; margin: 22px auto 0; }
+@media (min-width: 820px) {
+  .hero { padding: 48px 0 42px; }
+  .hero h1 { font-size: 40px; }
+  .chaps { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
+  .lesson { grid-template-columns: 320px 1fr; align-items: start; gap: 40px; padding-top: 34px; }
+  .lesson .shot { grid-column: 1; grid-row: 1; width: 320px; position: sticky; top: 90px; margin-top: 0; }
+  .lesson .txt { grid-column: 2; grid-row: 1; }
+  .lesson h1 { font-size: 32px; }
+}
+@media (prefers-reduced-motion: reduce) { .prog i { transition: none; } }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<noscript><div class="wrap" style="padding:30px 18px">Ative o JavaScript para ver o tutorial guiado.</div></noscript>
+<script>
+// Cada lição: [id, capítulo, título, imagem, introdução, [passos], dica]
+const L = [
+  ['instalar', 'Começar', 'Instalar e configurar', 'boas-vindas', 'Uns 5 minutos e o app fica com a sua cara.', [
+    'Baixe o arquivo <b>tdah-vida-real.apk</b> na <a href="https://github.com/cidedson/tdah-vida-real/releases/latest">página de versões</a> e abra.',
+    'Se o Play Protect avisar, toque em <b>Mais detalhes › Instalar mesmo assim</b>.',
+    'Toque em <b>Começar</b> e responda: seu nome, horários, o que mais trava, remédios e água.',
+    'Nas permissões, permita <b>Notificações</b> e <b>Alarmes e lembretes</b>.'],
+    'Depois o próprio app avisa quando sai versão nova e instala por cima, sem perder nada.'],
+  ['hoje', 'O seu dia', 'A tela Hoje', 'hoje', 'Uma tela só com o que importa agora.', [
+    'No topo, o card <b>Agora</b> mostra o remédio da vez ou a prioridade, já com o botão certo.',
+    'Logo abaixo ficam os atalhos: <b>Descarregar</b>, <b>Foco 25</b>, <b>Dia ruim</b> e <b>Anotar</b>.',
+    'O <b>Meu dia</b> separa manhã, tarde e noite, com a agenda, as tarefas com horário e as 3 prioridades (★).',
+    'O resto do dia (descarrego, corpo em dia, feito hoje) fica em linhas que abrem quando você toca.'],
+    'A lupa e o seu nível ficam no canto de cima da tela.'],
+  ['planejar', 'O seu dia', 'Planejar o dia e as 3 prioridades', 'adicionar-ao-dia', 'Três coisas importantes por dia. O resto é bônus.', [
+    'No <b>Meu dia</b>, toque no <b>+</b>.',
+    'Escreva o que é e, se for importante, ligue <b>Uma das 3 prioridades</b>.',
+    'Escolha quando: manhã, tarde, noite ou sem horário, e toque em <b>Adicionar</b>.',
+    'Feito? Toque no quadradinho. Para editar ou tirar, toque no item.'],
+    'O período que já passou se fecha sozinho quando está tudo feito.'],
+  ['humor', 'O seu dia', 'Humor em 1 toque', 'humor', 'Sem textão: uma carinha por dia.', [
+    'Toque na carinha de como você está.',
+    'Em troca aparece a frase do dia e a sua semana em carinhas.',
+    'Marque também a energia: baixa, média ou alta.'],
+    'Se vários dias seguidos aparecem pra baixo, o app sugere conversar com alguém de confiança.'],
+  ['anotar', 'Tarefas', 'Anotar do seu jeito', 'captura', 'Escreva ou fale como falaria com alguém.', [
+    'Toque em <b>Anotar</b> no Hoje.',
+    'Escreva ou dite: “dentista sexta 15h no centro”.',
+    'Confira as etiquetas que aparecem: dia, hora, local e categoria.',
+    'Toque em <b>Adicionar</b>. Com horário, o app avisa na hora; com local, 30 minutos antes.'],
+    '“Pagar a luz todo dia 10” vira uma tarefa que se repete sozinha.'],
+  ['quando', 'Tarefas', 'Horário, aviso e repetição', 'quando-onde', 'Tudo de quando e onde fica num card só.', [
+    'Abra a tarefa e toque em <b>Quando e onde</b>.',
+    'Defina o dia, o horário e com quanta antecedência quer o aviso.',
+    'Em <b>Repetir</b>, escolha todo dia, dias da semana ou todo mês.',
+    'Ao concluir uma tarefa que repete, a próxima já entra na matriz.'],
+    'Não deu desta vez? <b>Pular esta vez</b> mantém a repetição.'],
+  ['prioridades', 'Tarefas', 'Prioridades: o que fazer primeiro', 'matriz', 'Importante leva você para frente. Urgente tem prazo agora.', [
+    'Abra o menu ☰ › <b>Prioridades</b>.',
+    'As tarefas ficam em 4 caixas: Faz hoje, Agenda, Rápido ou repassa e Solta.',
+    'Prazo até amanhã sobe sozinho para urgente.',
+    'Use os filtros do topo para ver só Casa, Trabalho, Saúde…'],
+    'O que fica 7 dias na Solta vai para “Talvez um dia”, sem culpa.'],
+  ['fatiar', 'Tarefas', 'Fatiar tarefa grande', 'nova-tarefa-ia', 'Tarefa grande trava. Passo de 10 minutos, não.', [
+    'Com a IA ligada, escreva a tarefa grande: “declarar o imposto de renda até dia 30”.',
+    'A IA devolve o prazo, a categoria e passos de 5 a 25 minutos.',
+    'Confira e toque em <b>Aceitar</b>. Achou grosso? <b>Fatiar mais fino</b>.',
+    'Travou num passo durante o foco? <b>Travei neste passo</b> quebra só ele.'],
+    'Sem IA, você mesmo escreve os passos na fase <b>Como</b> da tarefa.'],
+  ['remedios', 'Remédios e avisos', 'Remédios e água', 'remedios', 'Nenhum horário esquecido.', [
+    'Abra <b>Remédios</b> na barra de baixo e cadastre nome e horários.',
+    'Na hora, o aviso chega com <b>Tomei</b> e <b>Lembrar em 15 min</b>.',
+    'Se não marcar, ele avisa de novo 30 minutos depois.',
+    'O próximo fica fixo na barra de notificações até você marcar.'],
+    'Com a agenda conectada, ele avisa para levar o remédio quando você vai estar fora no horário.'],
+  ['silencioso', 'Remédios e avisos', 'Tocar mesmo no silencioso', 'silencioso', 'Para quem vive com o celular no vibrar.', [
+    'Menu ☰ › Ajustes › <b>Tocar no silencioso</b>.',
+    'Ligue o que deve tocar: remédios e água; tarefas, lembretes e rotinas; fim do foco.',
+    'Deixe o celular no silencioso ou no vibrar e toque em <b>Testar remédio</b>.',
+    'Volume de alarme baixo? Toque em <b>Subir para 70%</b>.'],
+    'Ele toca pelo volume de alarme, como o despertador. Seu modo silencioso continua igual.'],
+  ['foco', 'Foco', 'Bloco de foco', 'foco', '25 minutos numa coisa só.', [
+    'Toque em <b>Foco 25</b> no Hoje, ou no relógio ao lado de uma prioridade.',
+    'A tela mostra só o passo atual. Ideia boa no meio? <b>Estacionar uma ideia</b>.',
+    'No fim toca o sino, mesmo com a tela apagada.',
+    'Diga se terminou: o passo é marcado e o próximo aparece.'],
+    'Dá para pausar, parar ou ganhar <b>+5 min</b> a qualquer hora.'],
+  ['disco', 'Foco', 'Tempo visual e focar junto', 'foco-disco', 'Enxergar o tempo e ter companhia ajudam a não desviar.', [
+    'Durante o bloco, toque em <b>Ver como disco (tempo visual)</b>: o vermelho vai diminuindo.',
+    'Para focar com alguém, toque em <b>Chamar alguém para focar junto</b>. Vai um convite pelo WhatsApp com o horário.',
+    'Na metade do bloco o celular vibra, para você conferir se segue no mesmo.',
+    'No fim, <b>Contar como foi</b> manda o resultado para a pessoa.']],
+  ['ciclo', 'Foco', 'Ciclo de 4 blocos', 'foco-fim', 'O pomodoro clássico, sem precisar contar.', [
+    'As bolinhas mostram em qual bloco você está, de 1 a 4.',
+    'Depois de cada bloco: pausa de 5 minutos.',
+    'Depois do 4º: pausa longa de 15 minutos.',
+    'Cada tarefa conta quantos blocos de foco recebeu, e a semana mostra o tempo total.']],
+  ['nao-perturbe', 'Foco', 'Não perturbe durante o foco', 'foco-ajustes', 'Os outros apps ficam quietos enquanto você foca.', [
+    'Menu ☰ › Ajustes › Bloco de foco › <b>Não perturbe durante o foco</b>.',
+    'O Android abre uma lista: ative o <b>TDAH na Vida Real</b> e volte para o app.',
+    'Pronto: o bloco liga o Não perturbe e desliga sozinho no fim, mesmo com o app fechado.'],
+    'Ligações e exceções do seu Não perturbe continuam valendo. Se ele já estava ligado, o app não mexe.'],
+  ['rotinas', 'Rotinas', 'Rotinas prontas', 'rotina-detalhe', 'Sete rotinas para não ter que decidir tudo de novo.', [
+    'Abra <b>Rotinas</b> na barra de baixo e escolha uma: manhã, trabalho, foco, fim do expediente, noite, semana ou SOS.',
+    'Marque os passos, ou use a <b>Versão mínima</b> em dia difícil.',
+    'Em <b>Lembrete diário</b>, escolha o horário.',
+    'No fim, toque em <b>Concluí a rotina</b>.']],
+  ['guiada', 'Rotinas', 'Rotina guiada', 'rotina-guiada', 'Um passo por vez, com o tempo de cada um.', [
+    'Na rotina, toque em <b>Começar guiada</b>.',
+    'Aparece um passo por vez, com o tempo dele no disco.',
+    '<b>Feito</b> vai para o próximo. <b>Pular</b> e <b>+1 min</b> quando precisar.',
+    'Passou do tempo? Ele conta para cima, sem bronca.'],
+    'Os minutos de cada passo mudam em <b>Editar esta rotina</b>.'],
+  ['semana', 'Acompanhar', 'Resumo da semana', 'semana', 'Olhar para trás sem julgamento.', [
+    'Domingo às 19h chega o resumo: tarefas, prioridades, remédios, humor e tempo de foco.',
+    'Ele também fica no menu ☰ › <b>Semana</b>.',
+    'Com a IA, <b>Resumo com a IA</b> comenta e sugere um ajuste pequeno.']],
+  ['pontos', 'Acompanhar', 'Pontos e recompensas', 'pontos', 'Cada coisa feita conta.', [
+    'Tarefa, passo, remédio, bloco de foco e rotina valem pontos.',
+    'Os pontos sobem de nível. Toque no troféu do topo para ver.',
+    'Crie recompensas com preço, como “pedir uma pizza: 150”.',
+    'Juntou moedas? <b>Resgatar</b>. Gastar não tira nível.'],
+    'Um dia sem nada não quebra a sequência. Ninguém perde ponto.'],
+  ['buscar', 'Acompanhar', 'Buscar em tudo', 'busca', 'Lembra que anotou, mas não sabe onde?', [
+    'Toque na lupa no topo do Hoje.',
+    'Digite uma palavra: acha tarefas, passos, lembretes, ideias, remédios, dias anteriores, rotinas e o guia.',
+    'Toque no resultado para abrir.'],
+    'Não precisa de acento: “racao” acha “ração”.'],
+  ['ligar-ia', 'Assistente de IA', 'Ligar a IA (grátis)', 'ia-chave', 'Opcional. Com o Gemini, começa no plano grátis.', [
+    'Menu ☰ › Ajustes › <b>Assistente de IA</b> (ou o microfone do meio da barra).',
+    'Escolha <b>Gemini</b> e toque em <b>Abrir o Google AI Studio</b>.',
+    'Entre com sua conta Google, toque em <b>Create API key</b> e copie a chave.',
+    'Volte, cole a chave e toque em <b>Salvar chave</b>.'],
+    'A chave fica só no seu celular. A assinatura Google AI Pro não cobre a API; a chave grátis tem limites.'],
+  ['assistente', 'Assistente de IA', 'Falar com o assistente', 'assistente', 'Fale do jeito que vier. Ele organiza.', [
+    'Toque no microfone do meio e fale o que está rolando.',
+    'Ou use os atalhos: <b>Planeja meu dia</b>, <b>Estou travado</b>, <b>Fatia uma tarefa</b>, <b>Fecha meu dia</b>.',
+    'Ele cria tarefas, lembretes e ideias e diz em uma linha o que fez.'],
+    'Em Ajustes dá para escolher o tom: direto, encorajador ou bem-humorado.'],
+  ['compartilhar', 'Mais', 'Mandar tarefa para alguém', 'recebida', 'Tarefa já fatiada, direto no celular da outra pessoa.', [
+    'Abra a tarefa e toque em <b>Compartilhar</b>.',
+    'Vai um link pelo WhatsApp.',
+    'Quem tem o app toca no link e a tarefa abre nele, pronta para entrar na matriz.'],
+    'A tarefa vai dentro do próprio link. Nenhum servidor guarda nada.'],
+  ['ajustes', 'Mais', 'Deixar do seu jeito', 'hoje-escuro', 'Tema, categorias e backup.', [
+    'Ajustes › <b>Aparência</b>: claro, escuro ou automático.',
+    'Ajustes › <b>Categorias</b>: crie as suas e troque a cor.',
+    'Ajustes › <b>Backup no Google Drive</b>: conecte uma vez e o app grava sozinho.',
+    '<b>Configuração guiada</b>: refaça as perguntas quando quiser.'],
+    'Sem conta e sem servidor: tudo fica no seu celular.'],
+];
+const ALT = {
+  'boas-vindas': 'Primeira tela do app: Vamos configurar, com os botões Começar, Já tenho um arquivo de perfil ou backup e Pular por agora',
+  hoje: 'Tela Hoje com o card Agora mostrando a água das 13:30, ações rápidas, humor e o Meu dia',
+  'adicionar-ao-dia': 'Folha Adicionar ao dia com o campo do que fazer, a opção Uma das 3 prioridades e a escolha de manhã, tarde ou noite',
+  humor: 'Humor Calmo aberto, com a frase do dia, a energia e as carinhas da semana',
+  captura: 'Captura mágica com “dentista sexta 15h no centro” e as etiquetas de dia, local e categoria',
+  'quando-onde': 'Card Quando e onde da tarefa Academia, com data, horário, aviso e repetição semanal',
+  matriz: 'Matriz de prioridades com as caixas Faz hoje, Agenda, Rápido ou repassa e Solta',
+  'nova-tarefa-ia': 'Tarefa Declarar o imposto de renda fatiada pela IA em 6 passos com minutos',
+  remedios: 'Tela Remédios e água com 2 de 8 marcados e a lista por manhã, tarde e noite',
+  silencioso: 'Ajustes, card Tocar no silencioso com remédios e lembretes ligados e os botões de teste',
+  foco: 'Bloco de foco com 24:58 restantes e o passo atual da tarefa',
+  'foco-disco': 'Bloco de foco com o disco vermelho de tempo visual e a mensagem Focando junto',
+  'foco-fim': 'Bloco concluído com as 4 bolinhas cheias e o botão de pausa longa de 15 minutos',
+  'foco-ajustes': 'Ajustes do bloco de foco com a opção Não perturbe durante o foco',
+  'rotina-detalhe': 'Rotina Lançamento da manhã com o botão Começar guiada e a lista de passos',
+  'rotina-guiada': 'Rotina guiada no passo 3 de 7, com o disco de tempo e os próximos passos',
+  semana: 'Resumo da semana com tarefas concluídas, 3 do dia, remédios, humor e o dia que mais rendeu',
+  pontos: 'Tela Pontos e recompensas com nível 3, dias seguidos, moedas e recompensas',
+  busca: 'Busca por “agua” mostrando resultados em Rotinas e no Guia',
+  'ia-chave': 'Ajustes do assistente de IA com o passo a passo para criar a chave do Gemini',
+  assistente: 'Assistente organizando o descarrego: criou uma tarefa e guardou uma ideia',
+  recebida: 'Tarefa recebida no celular, com os passos e o botão Adicionar às minhas tarefas',
+  'hoje-escuro': 'Tela Hoje no tema escuro',
+};
+const KEY = 'tutorial-vistas';
+let seen = {};
+try { seen = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { seen = {}; }
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(seen)); } catch (e) { /* sem armazenamento */ } };
+const app = document.getElementById('app');
+const chapters = [...new Set(L.map(l => l[1]))];
+const ICON_LIST = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>';
+
+function index() {
+  document.title = 'Como usar o TDAH na Vida Real · tutorial guiado';
+  const next = L.find(l => !seen[l[0]]);
+  const started = Object.keys(seen).length > 0;
+  let i = 0;
+  const chaps = chapters.map(c => `<section class="chap"><h2>${c}</h2><div class="list">${L.filter(l => l[1] === c).map(l => { i = L.indexOf(l) + 1; return `<a href="#${l[0]}" class="${seen[l[0]] ? 'seen' : ''}"><span class="n">${seen[l[0]] ? '✓' : i}</span><span class="t">${l[2]}</span><span class="arr">›</span></a>`; }).join('')}</div></section>`).join('');
+  app.innerHTML = `<header class="hero"><div class="wrap"><p class="eyebrow">Tutorial guiado · versão 2.0</p><h1>Como usar o TDAH na Vida Real</h1>
+    <p>${L.length} lições curtas, uns 10 minutos. Cada uma mostra a tela e o passo a passo. Dá para parar e voltar depois: o tutorial lembra onde você parou.</p>
+    <div class="go"><a class="btn light" href="#${(next || L[0])[0]}">${started && next ? 'Continuar de onde parei' : 'Começar o tutorial'}</a><a class="btn ghost" href="https://github.com/cidedson/tdah-vida-real/releases/latest">Baixar o app</a></div></div></header>
+    <main class="wrap"><div class="chaps">${chaps}</div>
+    <p class="foot">App Android, grátis e sem conta: os dados ficam no celular. Não substitui acompanhamento médico ou psicológico. Em crise, ligue 188 (CVV) ou 192 (SAMU).<br><a href="https://github.com/cidedson/tdah-vida-real">Código e novidades no GitHub</a></p></main>`;
+  window.scrollTo(0, 0);
+}
+
+function lesson(k) {
+  const [id, chap, title, img, intro, steps, tip] = L[k];
+  seen[id] = true; save();
+  document.title = `${title} · Como usar o TDAH na Vida Real`;
+  const prev = L[k - 1], next = L[k + 1];
+  app.innerHTML = `<div class="bar"><div class="wrap in"><a class="home" href="#" aria-label="Ver todas as lições">${ICON_LIST}</a><div class="meta"><b>${k + 1} de ${L.length}</b> · ${chap}</div></div><div class="prog"><i style="width:${Math.round(100 * (k + 1) / L.length)}%"></i></div></div>
+    <main class="wrap lesson">
+      <div class="txt"><h1>${title}</h1><p class="intro">${intro}</p><ol class="steps">${steps.map(s => `<li>${s}</li>`).join('')}</ol>${tip ? `<div class="tip"><b>Dica:</b> ${tip}</div>` : ''}</div>
+      <div class="shot"><img src="img/${img}.webp" width="540" height="1168" alt="${ALT[img] || ''}"></div>
+    </main>
+    <nav class="nav" aria-label="Navegar entre as lições"><div class="wrap in"><a class="btn out" href="#${prev ? prev[0] : ''}" ${prev ? '' : 'disabled aria-disabled="true"'}>‹ Anterior</a><a class="btn main" href="#${next ? next[0] : 'fim'}">${next ? 'Próxima ›' : 'Concluir'}</a></div></nav>`;
+  if (next) { const pre = new Image(); pre.src = `img/${next[3]}.webp`; }
+  window.scrollTo(0, 0);
+}
+
+function done() {
+  document.title = 'Pronto! · Como usar o TDAH na Vida Real';
+  app.innerHTML = `<main class="wrap done"><p class="big" aria-hidden="true">🎉</p><h1>Pronto, você viu tudo</h1><p class="intro" style="color:var(--muted)">Comece por uma coisa só hoje: as 3 prioridades ou um bloco de foco. O resto vem com o tempo.</p>
+    <div class="row"><a class="btn main" href="https://github.com/cidedson/tdah-vida-real/releases/latest">Baixar a última versão</a><a class="btn out" href="#">Ver todas as lições</a></div></main>`;
+  window.scrollTo(0, 0);
+}
+
+function route() {
+  const h = decodeURIComponent(location.hash.replace(/^#\/?/, ''));
+  if (h === 'fim') return done();
+  const k = L.findIndex(l => l[0] === h);
+  if (k >= 0) lesson(k); else index();
+}
+window.addEventListener('hashchange', route);
+document.addEventListener('keydown', e => {
+  const k = L.findIndex(l => l[0] === location.hash.slice(1));
+  if (k < 0) return;
+  if (e.key === 'ArrowRight') location.hash = L[k + 1] ? L[k + 1][0] : 'fim';
+  if (e.key === 'ArrowLeft' && k > 0) location.hash = L[k - 1][0];
+});
+// Deslizar para os lados troca de lição
+let x0 = null, y0 = null;
+document.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+document.addEventListener('touchend', e => {
+  if (x0 === null) return;
+  const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0; x0 = null;
+  const k = L.findIndex(l => l[0] === location.hash.slice(1));
+  if (k < 0 || Math.abs(dx) < 70 || Math.abs(dy) > Math.abs(dx) * 0.6) return;
+  if (dx < 0) location.hash = L[k + 1] ? L[k + 1][0] : 'fim';
+  else if (k > 0) location.hash = L[k - 1][0];
+}, { passive: true });
+route();
+</script>
+</body>
+</html>
