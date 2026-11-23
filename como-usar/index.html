@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Como usar o TDAH na Vida Real · tutorial guiado</title>
-<meta name="description" content="Tutorial guiado do app TDAH na Vida Real: 23 lições curtas, com a tela e o passo a passo de cada função.">
+<meta name="description" content="Tutorial guiado do app TDAH na Vida Real: 24 lições curtas, com a tela e o passo a passo de cada função.">
 <meta property="og:title" content="Como usar o TDAH na Vida Real">
-<meta property="og:description" content="Tutorial guiado: 23 lições curtas, com a tela e o passo a passo de cada função do app.">
+<meta property="og:description" content="Tutorial guiado: 24 lições curtas, com a tela e o passo a passo de cada função do app.">
 <meta property="og:image" content="https://cidedson.github.io/como-usar/img/capa.png">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#1f5f5b">
@@ -125,6 +125,12 @@ const L = [
     'Prazo até amanhã sobe sozinho para urgente.',
     'Use os filtros do topo para ver só Casa, Trabalho, Saúde…'],
     'O que fica 7 dias na Solta vai para “Talvez um dia”, sem culpa.'],
+  ['calendario', 'Tarefas', 'Calendário da semana', 'calendario', 'Os próximos 7 dias numa tela só.', [
+    'Toque em <b>Semana</b> no Meu dia, ou abra o menu ☰ › <b>Calendário</b>.',
+    'Cada dia mostra os compromissos da agenda, as tarefas com prazo e os lembretes, por horário.',
+    'Para criar uma tarefa num dia, toque no <b>+</b> daquele dia.',
+    'Para mudar uma tarefa de dia, toque no ícone de calendário ao lado dela e escolha o novo dia.'],
+    'As tarefas atrasadas aparecem em cima, sem bronca: é só escolher um dia novo.'],
   ['fatiar', 'Tarefas', 'Fatiar tarefa grande', 'nova-tarefa-ia', 'Tarefa grande trava. Passo de 10 minutos, não.', [
     'Com a IA ligada, escreva a tarefa grande: “declarar o imposto de renda até dia 30”.',
     'A IA devolve o prazo, a categoria e passos de 5 a 25 minutos.',
@@ -148,7 +154,7 @@ const L = [
     'A tela mostra só o passo atual. Ideia boa no meio? <b>Estacionar uma ideia</b>.',
     'No fim toca o sino, mesmo com a tela apagada.',
     'Diga se terminou: o passo é marcado e o próximo aparece.'],
-    'Dá para pausar, parar ou ganhar <b>+5 min</b> a qualquer hora.'],
+    'Durante o bloco a tela fica acesa e a barra de notificações mostra quanto falta. Dá para desligar em Ajustes › Bloco de foco.'],
   ['disco', 'Foco', 'Tempo visual e focar junto', 'foco-disco', 'Enxergar o tempo e ter companhia ajudam a não desviar.', [
     'Durante o bloco, toque em <b>Ver como disco (tempo visual)</b>: o vermelho vai diminuindo.',
     'Para focar com alguém, toque em <b>Chamar alguém para focar junto</b>. Vai um convite pelo WhatsApp com o horário.',
@@ -169,11 +175,12 @@ const L = [
     'Marque os passos, ou use a <b>Versão mínima</b> em dia difícil.',
     'Em <b>Lembrete diário</b>, escolha o horário.',
     'No fim, toque em <b>Concluí a rotina</b>.']],
-  ['guiada', 'Rotinas', 'Rotina guiada', 'rotina-guiada', 'Um passo por vez, com o tempo de cada um.', [
-    'Na rotina, toque em <b>Começar guiada</b>.',
-    'Aparece um passo por vez, com o tempo dele no disco.',
-    '<b>Feito</b> vai para o próximo. <b>Pular</b> e <b>+1 min</b> quando precisar.',
-    'Passou do tempo? Ele conta para cima, sem bronca.'],
+  ['guiada', 'Rotinas', 'Rotina guiada', 'rotina-guiada', 'Um passo por vez, com o tempo de cada um, e o app falando.', [
+    'Na rotina, escolha se quer <b>Falar os passos</b> e <b>Avançar sozinho</b>, e toque em <b>Começar guiada</b>.',
+    'Aparece um passo por vez, com o tempo dele no disco, e o app diz o que fazer.',
+    '<b>Feito</b> vai para o próximo. <b>Pular</b>, <b>+1 min</b> e <b>Pausar</b> quando precisar.',
+    'Apareceu algo a mais? <b>+ Incluir passo</b> põe um passo só nesta vez.',
+    'Passou do tempo? Ele conta para cima, sem bronca. Com <b>Avançar sozinho</b>, vai para o próximo mesmo com o celular bloqueado.'],
     'Os minutos de cada passo mudam em <b>Editar esta rotina</b>.'],
   ['semana', 'Acompanhar', 'Resumo da semana', 'semana', 'Olhar para trás sem julgamento.', [
     'Domingo às 19h chega o resumo: tarefas, prioridades, remédios, humor e tempo de foco.',
@@ -183,7 +190,8 @@ const L = [
     'Tarefa, passo, remédio, bloco de foco e rotina valem pontos.',
     'Os pontos sobem de nível. Toque no troféu do topo para ver.',
     'Crie recompensas com preço, como “pedir uma pizza: 150”.',
-    'Juntou moedas? <b>Resgatar</b>. Gastar não tira nível.'],
+    'Juntou moedas? <b>Resgatar</b>. Gastar não tira nível.',
+    'Tarefa parada vale mais (na matriz aparece “vale 15 pts”), e o <b>dia perfeito</b> vale +20: prioridades feitas e remédios marcados.'],
     'Um dia sem nada não quebra a sequência. Ninguém perde ponto.'],
   ['buscar', 'Acompanhar', 'Buscar em tudo', 'busca', 'Lembra que anotou, mas não sabe onde?', [
     'Toque na lupa no topo do Hoje.',
@@ -228,8 +236,9 @@ const ALT = {
   'foco-disco': 'Bloco de foco com o disco vermelho de tempo visual e a mensagem Focando junto',
   'foco-fim': 'Bloco concluído com as 4 bolinhas cheias e o botão de pausa longa de 15 minutos',
   'foco-ajustes': 'Ajustes do bloco de foco com a opção Não perturbe durante o foco',
-  'rotina-detalhe': 'Rotina Lançamento da manhã com o botão Começar guiada e a lista de passos',
-  'rotina-guiada': 'Rotina guiada no passo 3 de 7, com o disco de tempo e os próximos passos',
+  'rotina-detalhe': 'Rotina Lançamento da manhã com o botão Começar guiada e as opções Falar os passos e Avançar sozinho',
+  calendario: 'Calendário dos próximos 7 dias com a consulta médica, tarefas com horário e a reunião de pais',
+  'rotina-guiada': 'Rotina guiada no passo 3 de 8, com o disco de tempo, Pausar, Incluir passo, Voz e os próximos passos',
   semana: 'Resumo da semana com tarefas concluídas, 3 do dia, remédios, humor e o dia que mais rendeu',
   pontos: 'Tela Pontos e recompensas com nível 3, dias seguidos, moedas e recompensas',
   busca: 'Busca por “agua” mostrando resultados em Rotinas e no Guia',
@@ -252,7 +261,7 @@ function index() {
   const started = Object.keys(seen).length > 0;
   let i = 0;
   const chaps = chapters.map(c => `<section class="chap"><h2>${c}</h2><div class="list">${L.filter(l => l[1] === c).map(l => { i = L.indexOf(l) + 1; return `<a href="#${l[0]}" class="${seen[l[0]] ? 'seen' : ''}"><span class="n">${seen[l[0]] ? '✓' : i}</span><span class="t">${l[2]}</span><span class="arr">›</span></a>`; }).join('')}</div></section>`).join('');
-  app.innerHTML = `<header class="hero"><div class="wrap"><p class="eyebrow">Tutorial guiado · versão 2.0</p><h1>Como usar o TDAH na Vida Real</h1>
+  app.innerHTML = `<header class="hero"><div class="wrap"><p class="eyebrow">Tutorial guiado · versão 2.1</p><h1>Como usar o TDAH na Vida Real</h1>
     <p>${L.length} lições curtas, uns 10 minutos. Cada uma mostra a tela e o passo a passo. Dá para parar e voltar depois: o tutorial lembra onde você parou.</p>
     <div class="go"><a class="btn light" href="#${(next || L[0])[0]}">${started && next ? 'Continuar de onde parei' : 'Começar o tutorial'}</a><a class="btn ghost" href="https://github.com/cidedson/tdah-vida-real/releases/latest">Baixar o app</a></div></div></header>
     <main class="wrap"><div class="chaps">${chaps}</div>
