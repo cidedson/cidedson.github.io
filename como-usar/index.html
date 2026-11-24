@@ -143,12 +143,24 @@ const L = [
     'Se não marcar, ele avisa de novo 30 minutos depois.',
     'O próximo fica fixo na barra de notificações até você marcar.'],
     'Com a agenda conectada, ele avisa para levar o remédio quando você vai estar fora no horário.'],
+  ['agua', 'Remédios e avisos', 'Meta de água', 'agua', 'Quanto beber, em mL.', [
+    'Em <b>Remédios</b>, o card <b>Água de hoje</b> pede seu peso e calcula a meta: 35 mL por kg.',
+    'Cada lembrete de água marcado soma um copo. Bebeu fora do horário? <b>+ copo</b> ou <b>+ 500 mL</b>.',
+    'Em <b>Ajustar peso, meta e copo</b>, escolha o tamanho do seu copo ou ponha uma meta sua.',
+    'Bateu a meta: confete e +10 pontos. O total aparece também no Meu dia.'],
+    'A conta vale para adultos. Calor e treino pedem mais; quem tem doença nos rins ou no coração segue o médico.'],
   ['silencioso', 'Remédios e avisos', 'Tocar mesmo no silencioso', 'silencioso', 'Para quem vive com o celular no vibrar.', [
     'Menu ☰ › Ajustes › <b>Tocar no silencioso</b>.',
     'Ligue o que deve tocar: remédios e água; tarefas, lembretes e rotinas; fim do foco.',
     'Deixe o celular no silencioso ou no vibrar e toque em <b>Testar remédio</b>.',
     'Volume de alarme baixo? Toque em <b>Subir para 70%</b>.'],
     'Ele toca pelo volume de alarme, como o despertador. Seu modo silencioso continua igual.'],
+  ['dormir', 'Remédios e avisos', 'Horário de dormir', 'dormir', 'Nada toca depois que a higiene do sono começa.', [
+    'Menu ☰ › Ajustes › <b>Tocar no silencioso</b> › <b>Horário de dormir</b>.',
+    'Ele já vem do lembrete do Reset noturno até a hora de acordar. Ajuste os dois se quiser.',
+    'Nesse intervalo os avisos aparecem quietos, sem som nem vibração, e o “ainda não marcou” espera a manhã.',
+    'O lembrete que abre a higiene do sono continua tocando. Se algum remédio cai no horário, o card avisa.'],
+    'Precisa que um remédio da noite toque? Mude o horário dele para antes da higiene do sono.'],
   ['foco', 'Foco', 'Bloco de foco', 'foco', '25 minutos numa coisa só.', [
     'Toque em <b>Foco 25</b> no Hoje, ou no relógio ao lado de uma prioridade.',
     'A tela mostra só o passo atual. Ideia boa no meio? <b>Estacionar uma ideia</b>.',
@@ -231,6 +243,8 @@ const ALT = {
   matriz: 'Matriz de prioridades com as caixas Faz hoje, Agenda, Rápido ou repassa e Solta',
   'nova-tarefa-ia': 'Tarefa Declarar o imposto de renda fatiada pela IA em 6 passos com minutos',
   remedios: 'Tela Remédios e água com 2 de 8 marcados e a lista por manhã, tarde e noite',
+  agua: 'Remédios, card Água de hoje com 1,1 L de 2,8 L, barra de progresso e os botões mais 300 mL e mais 500 mL',
+  dormir: 'Ajustes, Horário de dormir das 21:00 às 06:30, chave ligada e aviso de que a Melatonina das 22:30 vai aparecer sem tocar',
   silencioso: 'Ajustes, card Tocar no silencioso com remédios e lembretes ligados e os botões de teste',
   foco: 'Bloco de foco com 24:58 restantes e o passo atual da tarefa',
   'foco-disco': 'Bloco de foco com o disco vermelho de tempo visual e a mensagem Focando junto',
@@ -261,7 +275,7 @@ function index() {
   const started = Object.keys(seen).length > 0;
   let i = 0;
   const chaps = chapters.map(c => `<section class="chap"><h2>${c}</h2><div class="list">${L.filter(l => l[1] === c).map(l => { i = L.indexOf(l) + 1; return `<a href="#${l[0]}" class="${seen[l[0]] ? 'seen' : ''}"><span class="n">${seen[l[0]] ? '✓' : i}</span><span class="t">${l[2]}</span><span class="arr">›</span></a>`; }).join('')}</div></section>`).join('');
-  app.innerHTML = `<header class="hero"><div class="wrap"><p class="eyebrow">Tutorial guiado · versão 2.1</p><h1>Como usar o TDAH na Vida Real</h1>
+  app.innerHTML = `<header class="hero"><div class="wrap"><p class="eyebrow">Tutorial guiado · versão 2.2</p><h1>Como usar o TDAH na Vida Real</h1>
     <p>${L.length} lições curtas, uns 10 minutos. Cada uma mostra a tela e o passo a passo. Dá para parar e voltar depois: o tutorial lembra onde você parou.</p>
     <div class="go"><a class="btn light" href="#${(next || L[0])[0]}">${started && next ? 'Continuar de onde parei' : 'Começar o tutorial'}</a><a class="btn ghost" href="https://github.com/cidedson/tdah-vida-real/releases/latest">Baixar o app</a></div></div></header>
     <main class="wrap"><div class="chaps">${chaps}</div>
