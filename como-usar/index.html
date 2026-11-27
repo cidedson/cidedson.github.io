@@ -194,6 +194,12 @@ const L = [
     'Apareceu algo a mais? <b>+ Incluir passo</b> põe um passo só nesta vez.',
     'Passou do tempo? Ele conta para cima, sem bronca. Com <b>Avançar sozinho</b>, vai para o próximo mesmo com o celular bloqueado.'],
     'Os minutos de cada passo mudam em <b>Editar esta rotina</b>.'],
+  ['habitos', 'Acompanhar', 'Hábitos com meta', 'habitos', 'Todo dia ou tantas vezes por semana, com sequência e mapa do mês.', [
+    'Menu ☰ › <b>Hábitos</b>. Escreva o hábito e toque em <b>+</b>.',
+    'Escolha a meta: <b>Todo dia</b> ou <b>5x por semana</b>, por exemplo. Em <b>Lembretes</b>, ponha um ou mais horários.',
+    'Fez? <b>Feito hoje</b>, ou o <b>Feito</b> no próprio aviso. Esqueceu de marcar ontem? Toque no dia na fileira da semana.',
+    'Em <b>Mês</b>, o calendário mostra os dias feitos. Dá para marcar dias passados ali também.'],
+    'O aviso não chega no dia em que você já fez, nem depois de bater a meta da semana. Meta da semana batida vale +10 pontos.'],
   ['semana', 'Acompanhar', 'Resumo da semana', 'semana', 'Olhar para trás sem julgamento.', [
     'Domingo às 19h chega o resumo: tarefas, prioridades, remédios, humor e tempo de foco.',
     'Ele também fica no menu ☰ › <b>Semana</b>.',
@@ -245,6 +251,7 @@ const ALT = {
   remedios: 'Tela Remédios e água com 2 de 8 marcados e a lista por manhã, tarde e noite',
   agua: 'Remédios, card Água de hoje com 0,8 L de 4,6 L, aviso de treino às 18:00, plano automático de 10 copos de 400 mL a cada 1h35 e a lista de copos com os mL',
   dormir: 'Ajustes, Horário de dormir das 21:00 às 06:30, chave ligada e aviso de que a Melatonina das 22:30 vai aparecer sem tocar',
+  habitos: 'Tela Hábitos: Academia 5x por semana, 4 de 5 nesta semana, 2 semanas seguidas; Alongar todo dia, 4 dias seguidos, com o calendário de novembro pintado nos dias feitos',
   silencioso: 'Ajustes, card Tocar no silencioso com remédios e lembretes ligados, o controle do volume de alarme em 71% com os botões menos e mais, e o botão Ouvir o alarme neste volume',
   foco: 'Bloco de foco com 24:58 restantes e o passo atual da tarefa',
   'foco-disco': 'Bloco de foco com o disco vermelho de tempo visual e a mensagem Focando junto',
@@ -275,7 +282,7 @@ function index() {
   const started = Object.keys(seen).length > 0;
   let i = 0;
   const chaps = chapters.map(c => `<section class="chap"><h2>${c}</h2><div class="list">${L.filter(l => l[1] === c).map(l => { i = L.indexOf(l) + 1; return `<a href="#${l[0]}" class="${seen[l[0]] ? 'seen' : ''}"><span class="n">${seen[l[0]] ? '✓' : i}</span><span class="t">${l[2]}</span><span class="arr">›</span></a>`; }).join('')}</div></section>`).join('');
-  app.innerHTML = `<header class="hero"><div class="wrap"><p class="eyebrow">Tutorial guiado · versão 2.2</p><h1>Como usar o TDAH na Vida Real</h1>
+  app.innerHTML = `<header class="hero"><div class="wrap"><p class="eyebrow">Tutorial guiado · versão 2.3</p><h1>Como usar o TDAH na Vida Real</h1>
     <p>${L.length} lições curtas, uns 10 minutos. Cada uma mostra a tela e o passo a passo. Dá para parar e voltar depois: o tutorial lembra onde você parou.</p>
     <div class="go"><a class="btn light" href="#${(next || L[0])[0]}">${started && next ? 'Continuar de onde parei' : 'Começar o tutorial'}</a><a class="btn ghost" href="https://github.com/cidedson/tdah-vida-real/releases/latest">Baixar o app</a></div></div></header>
     <main class="wrap"><div class="chaps">${chaps}</div>
